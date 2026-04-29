@@ -332,7 +332,7 @@ UpgradesTab:AddToggle("UpgradeSingle", {
                 if p and p.Parent then
                     pcall(function() ReplicatedStorage.RemoteEvents.Server.Upgrade:InvokeServer(p,"Upgrade",upgradeAmt) end)
                 end
-                task.wait(0.3)
+                task.wait(0.1)
             end
         end)
     end,
@@ -351,7 +351,7 @@ RebirthTab:AddToggle("AutoRebirth", {
         task.spawn(function()
             while autoRebirthOn do
                 pcall(function() ReplicatedStorage.RemoteEvents.Server.RebirthEvent:FireServer() end)
-                task.wait(0.5)
+                task.wait(0.2)
             end
         end)
     end,
@@ -371,7 +371,7 @@ SpeedTab:AddToggle("BuySpeed", {
         task.spawn(function()
             while buySpeedOn do
                 pcall(function() ReplicatedStorage.RemoteEvents.Server.PurchaseSpeed:FireServer(speedAmt) end)
-                task.wait(0.5)
+                task.wait(0.1)
             end
         end)
     end,
@@ -418,7 +418,7 @@ SpinTab:AddToggle("AutoSpin", {
         task.spawn(function()
             while autoSpinOn do
                 pcall(function() ReplicatedStorage.RemoteEvents.Server.ActivateSpin:InvokeServer() end)
-                task.wait(0.5)
+                task.wait(0.3)
             end
         end)
     end,
@@ -504,7 +504,7 @@ for _, def in ipairs(FARM_DEFS) do
 
     -- Carry override input
     tab:AddInput("CarryInput_"..zk, {
-        Title       = "Carry Limit Override",
+        Title       = "Carry Limit",
         Description = "Set manually if auto-detect is wrong. Leave 0 to auto-detect.",
         Default     = "0",
         Placeholder = "0 = auto detect",
@@ -591,7 +591,7 @@ for _, def in ipairs(FARM_DEFS) do
                                         end
                                         if found then break end
                                     end
-                                    if not found then task.wait(2) end
+                                    if not found then task.wait(0.2) end
                                 end
                             end
                         end
@@ -614,7 +614,7 @@ for _, def in ipairs(FARM_DEFS) do
                             end
                             if not foundAny then
                                 GoToMyPlot()
-                                task.wait(2)
+                                task.wait(0.2)
                                 continue
                             end
                         else
@@ -626,7 +626,7 @@ for _, def in ipairs(FARM_DEFS) do
                                 local hasJailed = false
                                 while autoGetOn and not hasJailed do
                                     if CountJailedInZone(zk) > 0 then hasJailed = true end
-                                    if not hasJailed then task.wait(2) end
+                                    if not hasJailed then task.wait(0.2) end
                                 end
                                 continue
                             end
@@ -646,7 +646,7 @@ for _, def in ipairs(FARM_DEFS) do
                     -- Return to base if we grabbed anything
                     if collected > 0 then
                         GoToMyPlot()
-                        task.wait(1.5)
+                        task.wait(0.3)
                     end
                 end
             end)
